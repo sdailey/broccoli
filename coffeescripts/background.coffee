@@ -19,22 +19,18 @@ popupParcel = {
   # serviceName
   # forUrl
 }
-debugParcelCenterCount_Background = 0
 
 
 sendParcel = (parcel) ->
   outPort = chrome.extension.connect({name: "fromBackgroundToPopup"})
-  
-  debugParcelCenterCount_Background++
-  console.log 'popup message ' + debugParcelCenterCount_Background
   
   if !parcel.msg? or !parcel.forUrl?
     return false
   
   switch parcel.msg
     when 'popupParcel_ready'
-      console.log "when 'popupParcel_ready'"
-      console.debug parcel 
+      # console.log "when 'popupParcel_ready'"
+      # console.debug parcel 
       
       refreshBadge(parcel.popupParcel)
       
@@ -74,32 +70,6 @@ messageMainView_noServiceMatch = (forUrl) ->
   sendParcel(sendObj)
 
   
-refreshBadge = (popupParcel) ->
-  console.log 'console.debug popupParcelconsole.debug popupParcelconsole.debug popupParcelconsole.debug popupParcelconsole.debug popupParcel'
-  console.debug popupParcel
-  
-  #update badge text
-  if Object.keys(popupParcel.pointsToVoteOn).length > 0
-    updateBadgeText(Object.keys(popupParcel.pointsToVoteOn).length)
-    
-  else if popupParcel.nullOrCachedServices[popupParcel.serviceName]? and popupParcel.nullOrCachedServices[popupParcel.serviceName].decisionPoints? and Object.keys(popupParcel.nullOrCachedServices[popupParcel.serviceName].decisionPoints).length > 0
-    
-    voteYesCount = 0
-    totalCount = 0 
-    
-    for pointName, decisionPointsArray of popupParcel.nullOrCachedServices[popupParcel.serviceName].decisionPoints
-      
-      if decisionPointsArray[decisionPointsArray.length - 1].voteAgree
-        voteYesCount++
-      
-      totalCount++
-      
-    updateBadgeText(voteYesCount + '/' + totalCount)
-    
-    
-  
-  
-  
 cacheService = (servicesCache, servicesFull, serviceName, currentTime, callback) ->
   if  !servicesCache[serviceName]?
     servicesCache[serviceName] = {}
@@ -126,15 +96,13 @@ cacheService = (servicesCache, servicesFull, serviceName, currentTime, callback)
   )
     
 cacheDecisionPoint = (servicesCache, servicesFull, serviceName, userAgreedBool, pointId, currentTime, callback) ->
-  console.log 'bloblo1'
-  console.debug servicesCache
-  console.debug servicesFull
+  
   if servicesCache[serviceName]? and servicesFull[serviceName]? and servicesFull[serviceName].service.pointsData[pointId]?
-    console.log 'bloblo2'
+    
     if !servicesCache[serviceName].decisionPoints[pointId]?
-      console.log 'bloblo2.5'
+      
       servicesCache[serviceName].decisionPoints[pointId] = []
-    console.log 'bloblo3'
+    
     rawPointData = servicesFull[serviceName].service.pointsData[pointId]
     
     canonical = 
@@ -163,15 +131,13 @@ cacheDecisionPoint = (servicesCache, servicesFull, serviceName, userAgreedBool, 
     servicesCache[serviceName].decisionPoints[pointId].push setObj
     
     chrome.storage.local.set({'servicesCache': servicesCache}, ->
-      console.log 'bloblo4'
-      console.debug servicesCache
+      
       callback(servicesCache, serviceName, pointId)
     )
   
 cacheUserVote = (userAgreedBool, serviceName, pointId) ->
   currentTime = Date.now()
   
-  console.log ' herherhere '
   
   chrome.storage.local.get('servicesFull', (response) ->
     
@@ -549,7 +515,25 @@ updateService = (servicesFullObject = {}, serviceName, currentUrl, callback, ser
     )
   )
   
+refreshBadge = (popupParcel) ->
   
+  #update badge text
+  if Object.keys(popupParcel.pointsToVoteOn).length > 0
+    updateBadgeText(Object.keys(popupParcel.pointsToVoteOn).length)
+    
+  else if popupParcel.nullOrCachedServices[popupParcel.serviceName]? and popupParcel.nullOrCachedServices[popupParcel.serviceName].decisionPoints? and Object.keys(popupParcel.nullOrCachedServices[popupParcel.serviceName].decisionPoints).length > 0
+    
+    voteYesCount = 0
+    totalCount = 0 
+    
+    for pointName, decisionPointsArray of popupParcel.nullOrCachedServices[popupParcel.serviceName].decisionPoints
+      
+      if decisionPointsArray[decisionPointsArray.length - 1].voteAgree
+        voteYesCount++
+      
+      totalCount++
+      
+    updateBadgeText(voteYesCount + '/' + totalCount) 
 
 servicesReady = (servicesIndex, forUrl) ->
   

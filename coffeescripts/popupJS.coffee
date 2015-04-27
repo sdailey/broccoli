@@ -8,8 +8,6 @@ $(document).ready( ->
   
   renderedBool = false
   
-  debugParcelCenterCountPopup = 0
-  recieved_parcels_popup = 0
   
   userVotes = (userAgreedBool, serviceName, pointId) ->
     
@@ -204,7 +202,6 @@ $(document).ready( ->
       # console.debug specificPointId
       
       specificPoint = viewData.popupParcel.servicesFull[viewData.popupParcel.serviceName].service.pointsData[specificPointId]
-      console.debug specificPoint
       
       renderPoint = thisPoint(specificPoint, _.last(viewData.cachedVotedPoints[specificPointId]))
       
@@ -223,12 +220,9 @@ $(document).ready( ->
       else  
         preferAbleTldrLengthPointHash = {}
         
-        console.log 'renderedBool'
-        console.log renderedBool
         if renderedBool is false 
           # if it's the first time the popup opens, find a tldr summary that's not too long
           for pointId, point of viewData.toVotePoints
-            console.debug point
             
             if point.tosdr.tldr.length < 380 and point.tosdr.tldr.length > 10
               preferAbleTldrLengthPointHash[pointId] = point
@@ -252,11 +246,6 @@ $(document).ready( ->
         
         
         
-        
-      
-      
-      # console.log 'console.debug toVotePointIds'
-      # console.debug toVotePointIds
     
     allPointIds = _.union Object.keys(viewData.cachedVotedPoints), toVotePointIds
     
@@ -546,10 +535,6 @@ $(document).ready( ->
     return true
     
   receiveParcel  = (parcel) ->
-    # console.log 'console.debug parcel'
-    # console.debug parcel
-    recieved_parcels_popup++
-    console.log 'recieved parcels ' + recieved_parcels_popup
     
     if !parcel.msg?
       
@@ -736,16 +721,11 @@ $(document).ready( ->
           port.postMessage(parcel)
           
     )
-  # port.onMessage.addListener((pkg) ->
-  #   debugParcelCenterCountPopup++
-  #   receiveParcel(pkg)
-  # )
     
     # listen for other messages
   chrome.extension.onConnect.addListener((port) ->  
     if port.name is 'fromBackgroundToPopup'
-      debugParcelCenterCountPopup++
-      console.log 'popup message ' + debugParcelCenterCountPopup
+      
       port.onMessage.addListener((pkg) ->
         receiveParcel(pkg)
       )
