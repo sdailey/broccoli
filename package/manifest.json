@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+
+  "name": "Broccoli",
+  "description": "This extension allows for quicker consumption of tweets.",
+  "version": "0.9.0",
+
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "background":{
+    "scripts": [
+      "vendor/jquery-1.11.1.min.js",
+      "vendor/Underscore1-8-3.js",
+      "vendor/reactor.js",
+      "background.js"
+    ]
+  },
+  
+  // "background": [ {
+  //   "js": ["vendor/jquery-1.11.1.min.js", "popupJS.js" ],
+  //   "persistent": true
+  // }],
+  
+  "content_scripts": [ {
+    "js": ["vendor/jquery-1.11.1.min.js", "popupJS.js", "vendor/Underscore1-8-3.js" ],
+    "matches": ["*://*/*"],
+    "run_at": "document_end"
+  }]
+  
+  ,"browser_action": {
+    "name": "Broccoli",
+    "default_icon": "broccoli128.png",
+    "default_popup": "popup.html"
+    
+  }
+}
