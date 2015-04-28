@@ -19,8 +19,7 @@ popupParcel = {
   # serviceName
   # forUrl
 }
-
-
+ 
 sendParcel = (parcel) ->
   outPort = chrome.extension.connect({name: "fromBackgroundToPopup"})
   
@@ -50,7 +49,6 @@ updateMainViewData = (pointsToVoteOn, nullOrCachedServices, servicesFull, servic
   
   
   if popupOpen
-    
     sendObj = 
       'popupParcel': popupParcel 
       'forUrl': forUrl
@@ -442,7 +440,7 @@ servicesIndexAndServicesFullReady = (servicesIndex, servicesFull, serviceName, f
 updateServicesIndex = (currentUrl) ->
   timestamp = Date.now()
   # console.log 'in updateServicesIndex'
-  $.ajax('http://tosdr.org/index/services.json', { success: (servicesIndex) ->
+  $.ajax('https://tosdr.org/index/services.json', { success: (servicesIndex) ->
     # console.log 'services json: remove from production'
     # console.debug(servicesIndex);
     

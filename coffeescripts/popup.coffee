@@ -5,7 +5,6 @@ $(document).ready( ->
   cachedVotedPoints = []
   
   viewElementId = ''
-  
   renderedBool = false
   
   userVotes = (userAgreedBool, serviceName, pointId) ->

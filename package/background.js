@@ -370,7 +370,7 @@
   updateServicesIndex = function(currentUrl) {
     var timestamp;
     timestamp = Date.now();
-    return $.ajax('http://tosdr.org/index/services.json', {
+    return $.ajax('https://tosdr.org/index/services.json', {
       success: function(servicesIndex) {
         var getVanity, name, serviceNamesArray, setObj, vanityHash, _j, _len;
         if (servicesIndex['world-of-warcraft'] != null) {

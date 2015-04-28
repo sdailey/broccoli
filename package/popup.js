@@ -138,7 +138,7 @@
       return $('#share-box-textarea').hide();
     };
     renderMainView = function(viewData, specificPointId) {
-      var allPointIds, cellCount, cellWidth, contributor, creditsBoxHtmlString, creditsHtmlString, el, el_closeCreditsAttributionsBox, el_closeShareBoxTextarea, el_goToHistoryView, el_goToNext, el_noDrop, el_openCreditsAttributionsBox, el_openShareBoxTextarea, el_yesDrop, href, index, link, linkName, linkObj, linkType, permaPointUrl, point, pointHtmlString, pointId, pointStatsHtml, prefLengthPointIds, preferAbleTldrLengthPointHash, randIndex, remainingPoints, renderPoint, serviceCapped, serviceHtmlString, shareBlobString, shareHtmlString, specificPoint, toVotePointIds, voteHtmlString, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _ref3, _ref4;
+      var allPointIds, cellCount, cellWidth, contributor, creditsBoxHtmlString, creditsHtmlString, el, el_closeCreditsAttributionsBox, el_closeShareBoxTextarea, el_creditsAttributionsBox, el_goToHistoryView, el_goToNext, el_noDrop, el_openCreditsAttributionsBox, el_openShareBoxTextarea, el_yesDrop, href, index, link, linkName, linkObj, linkType, permaPointUrl, point, pointHtmlString, pointId, pointStatsHtml, prefLengthPointIds, preferAbleTldrLengthPointHash, randIndex, remainingPoints, renderPoint, serviceCapped, serviceHtmlString, shareBlobString, shareHtmlString, specificPoint, toVotePointIds, voteHtmlString, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _ref3, _ref4;
       if (specificPointId == null) {
         specificPointId = null;
       }
@@ -162,6 +162,7 @@
       } else {
         if (toVotePointIds.length < 2) {
           randIndex = 0;
+          renderPoint = thisPoint(viewData.toVotePoints[toVotePointIds[randIndex]]);
         } else {
           preferAbleTldrLengthPointHash = {};
           if (renderedBool === false) {
@@ -276,14 +277,15 @@
       creditsHtmlString += "<span id='open-credits-attributions-box' style='color:blue;2'>credits</span> <br>";
       $("#creditsDropBox").html(creditsHtmlString);
       shareBlobString = '<button class="btn" id="close-share-box-textarea" style="float:right;margin-bottom: 10px;"> close </button><textarea>' + shareBlobString + '</textarea>';
-      shareBlobString = '<span style="position: relative;font-size: 1.3em;top: 4px;">Shareable text:</span> ' + shareBlobString;
+      shareBlobString = "<span style='position: relative;font-size: 1.3em;top: 4px;'>Here's a start! Shareable text:</span> " + shareBlobString;
       $("#share-box-textarea").html(shareBlobString);
       el_openCreditsAttributionsBox = $('#open-credits-attributions-box');
+      el_creditsAttributionsBox = $('#credits-attributions-box');
       el_openCreditsAttributionsBox.bind('click', function(ev) {
-        if (el_openCreditsAttributionsBox.css('display') === 'none') {
-          return el_openCreditsAttributionsBox.show(700);
+        if (el_creditsAttributionsBox.css('display') === 'none') {
+          return el_creditsAttributionsBox.show(700);
         } else {
-          return el_openCreditsAttributionsBox.hide(700);
+          return el_creditsAttributionsBox.hide(700);
         }
       });
       mainViewElsToUnbind.push(el_openCreditsAttributionsBox);
@@ -314,12 +316,12 @@
             _ref4 = renderPoint.meta['contributors'];
             for (_k = 0, _len2 = _ref4.length; _k < _len2; _k++) {
               contributor = _ref4[_k];
-              "" + contributor + "<br>";
+              creditsBoxHtmlString += htmlEntities(contributor) + "<br>";
             }
           }
         }
         if (renderPoint.meta['license-for-this-file'] != null) {
-          creditsBoxHtmlString += "<strong>License for summary file</strong>: " + renderPoint.meta['license-for-this-file'] + "<br>";
+          creditsBoxHtmlString += "<strong>License for summary file</strong>: " + htmlEntities(renderPoint.meta['license-for-this-file']) + "<br>";
         }
       }
       creditsBoxHtmlString += '<br><ul>';
