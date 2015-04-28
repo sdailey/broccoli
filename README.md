@@ -3,6 +3,8 @@ Broccoli for TOS;DR (Terms of Service; Didn't Read) is a free extension availabl
 
 Download link: https://chrome.google.com/webstore/detail/broccoli/fmbgfnapanennphegjjfjgdlopobepod
 
+"Broccoli" is kind of like terms of service: avoided at all costs but good for you. ;)
+
 Review websites' terms of service and privacy policies, one point at a time, with the latest summaries from www.tosdr.org. Broccoli displays these summaries one point at a time, so that you can digest these agreements over time (there's also a list-view for a succinct overview).
 
 Features:

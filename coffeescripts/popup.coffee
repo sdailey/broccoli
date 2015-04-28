@@ -92,11 +92,11 @@ $(document).ready( ->
       if pointItem.voteAgree
         agreedClass = 'agreed'
         agreeLable = 'btn-success'
-        htmlString = 'agreed'
+        htmlString = ' fair '
       else
         agreedClass = 'disagreed'
         agreeLable = 'btn-danger'
-        htmlString = 'disagreed'
+        htmlString = 'unfair'
       
       # pointItemsHtmlString += '<table><tbody><tr>' 
       pointItemsHtmlString += '<div class="historyPointId pointListItem ' + agreedClass + '" data-pointid="' + pointItem.canonical.id + '">'
@@ -417,7 +417,7 @@ $(document).ready( ->
     creditsBoxHtmlString += "<li><a target='_blank' href='https://www.flickr.com/photos/darwinbell/314088675/in/faves-56737858@N04/' > broccoli's logo image </a></li> <br>"
     
     creditsBoxHtmlString += "<li>broccoli <a target='_blank' href='https://github.com/sdailey/broccoli' >github</a>, <a target='_blank' href='https://twitter.com/spencenow' >author</a></li><br>"
-    
+    creditsBoxHtmlString += "<li>buttons' styling was inspired by <a target='_blank' href='http://getbootstrap.com/' >bootstrap</a></li><br>"
     creditsBoxHtmlString += "</ul>"
     
     $('#credits-attributions-box').html(creditsBoxHtmlString)
