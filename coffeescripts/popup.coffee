@@ -569,6 +569,7 @@ $(document).ready( ->
             $("#landingStatusBox").html('Summaries available! :)')
         )
         
+        
       when 'noServiceMatch'
       
         # console.log "when 'noServiceMatch'"

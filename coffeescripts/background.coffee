@@ -144,7 +144,6 @@ cacheUserVote = (userAgreedBool, serviceName, pointId) ->
     
     servicesFull = response.servicesFull
     
-    
     # console.log 'servicesFull[serviceName]?'
     # console.log servicesFull[serviceName]?
     # console.log 'servicesFull[serviceName].service.pointsData[pointId]?'

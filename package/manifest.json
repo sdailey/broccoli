@@ -3,7 +3,7 @@
 
   "name": "Broccoli",
   "description": "Review websites' terms of service one point at a time, with the latest summaries from www.tosdr.org.",
-  "version": "0.9.50",
+  "version": "0.9.52",
 
   "permissions": [
     "tabs",
