@@ -241,7 +241,7 @@
       cellCount++;
       shareHtmlString = '<td class="linkTableCell variableWidthCell">';
       shareHtmlString += '<div id="share-button">';
-      shareHtmlString += '<button class="btn" id="open-share-box-textarea" style="font-size: 1em;background-color: rgb(232, 249, 255);padding:3px;margin-top:2px;" > <img src="/shareSpritesPNG.png" alt="copy" /> </button>';
+      shareHtmlString += '<button class="btn" id="open-share-box-textarea" style="font-size: 1em;background-color: rgb(232, 249, 255);padding:3px;margin-top:2px;margin-left: 10px;" > <img src="/shareSpritesPNG.png" alt="copy" /> </button>';
       shareHtmlString += '</div>';
       shareHtmlString += '</td>';
       cellCount++;
@@ -253,7 +253,7 @@
       }
       $('#pointDropBox').html(pointHtmlString);
       $('.variableWidthCell').css('width', cellWidth + '%');
-      serviceHtmlString = '<span style="font-size: 1.2em;line-height: 2.3em;"> <b>' + serviceCapped + "</b></span><br>";
+      serviceHtmlString = '<div style="font-size: 1.2em;line-height: 2.3em; padding-top: 6px;"> ' + serviceCapped + "</div>";
       if (viewData.serviceInfo.twitter != null) {
         serviceHtmlString += "<a target='_blank' href='https://twitter.com/" + viewData.serviceInfo.twitter + "' > " + viewData.serviceInfo.twitter + " </a> <br>";
       }
@@ -338,9 +338,9 @@
         return $('#credits-attributions-box').hide(600);
       });
       mainViewElsToUnbind.push(el_closeCreditsAttributionsBox);
-      voteHtmlString = '<button id="yes-' + renderPoint.id + '" class="btn" > yes </button>';
+      voteHtmlString = '<button id="yes-' + renderPoint.id + '" class="btn-down-right btn" > yes </button>';
       $("#yesDrop").html(voteHtmlString);
-      voteHtmlString = '<button id="no-' + renderPoint.id + '" class="btn" > no </button>';
+      voteHtmlString = '<button id="no-' + renderPoint.id + '" class="btn-down-right btn" > no </button>';
       $("#noDrop").html(voteHtmlString);
       $(".voteYes button").removeAttr('style');
       $(".voteNo button").removeAttr('style');
@@ -397,6 +397,7 @@
       });
       $('body').removeAttr('style');
       pointStatsHtml = '';
+      pointStatsHtml += '<div style="font-size:1.2em; padding-bottom: 5px;">' + serviceCapped + ' </div>';
       pointStatsHtml += allPointIds.length + ' points total. <br>';
       pointStatsHtml += Object.keys(viewData.toVotePoints).length + ' left to review.';
       $("#pointStats").html(pointStatsHtml);
