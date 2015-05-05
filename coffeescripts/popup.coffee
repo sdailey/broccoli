@@ -420,6 +420,7 @@ $(document).ready( ->
     creditsBoxHtmlString += "<li>buttons' styling was inspired by <a target='_blank' href='http://getbootstrap.com/' >bootstrap</a></li><br>"
     creditsBoxHtmlString += "</ul>"
     
+    
     $('#credits-attributions-box').html(creditsBoxHtmlString)
     
     el_closeCreditsAttributionsBox = $('#close-credits-attributions-box')

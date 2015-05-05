@@ -131,6 +131,7 @@ body {
 .voteYes button {
   font-size: 1em;padding:3px;
   background-color: rgb(218, 252, 218);
+  border: 1px solid rgba(82, 222, 79, 0.3);
 }
 .voteYes button:hover {
   background-color: rgb(189, 236, 189);
@@ -140,6 +141,7 @@ body {
   font-size: 1em;
   padding:3px;
   background-color: rgba(255, 134, 134, 0.31);
+  border: 1px solid rgba(255, 19, 19, 0.1);
 }
 .voteNo button:hover {
   background-color: rgba(255, 19, 19, 0.37);
@@ -209,6 +211,7 @@ body {
 .btn-danger {
   color: #fff;
   background-color: #d9534f;
+  
   border-color: #d43f3a;
   /*margin-left: 10px;*/
 }
@@ -217,6 +220,7 @@ body {
   color: #fff;
   background-color: #5cb85c;
   border-color: #4cae4c;
+  
   /*margin-left: 10px;*/
 }
 

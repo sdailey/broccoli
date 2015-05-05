@@ -524,13 +524,13 @@
     var currentTime;
     updatesCountTest++;
     currentTime = Date.now();
-    return chrome.storage.local.get(null, function(allItems) {
-      if (allItems['services'] != null) {
-        if ((currentTime - allItems['services'].timestamp) < 86400000) {
+    return chrome.storage.local.get(null, function(allItemsInLocalStorage) {
+      if (allItemsInLocalStorage['services'] != null) {
+        if ((currentTime - allItemsInLocalStorage['services'].timestamp) < 86400000) {
           return updateServicesIndex(currentUrl);
         } else {
           return reactor.dispatchEvent('deliverServices', {
-            'services': services,
+            'services': allItemsInLocalStorage['services'],
             'forUrl': currentUrl
           });
         }

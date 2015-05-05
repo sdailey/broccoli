@@ -609,17 +609,17 @@ initialize = (currentUrl) ->
   currentTime = Date.now()
   
    # to prevent repeated api requests for services - we check to see if we have an up-to-date version in local storage
-  chrome.storage.local.get(null, (allItems) ->
+  chrome.storage.local.get(null, (allItemsInLocalStorage) ->
       
-    if allItems['services']?
+    if allItemsInLocalStorage['services']?
       
-      if ((currentTime - allItems['services'].timestamp) < 86400000)
+      if ((currentTime - allItemsInLocalStorage['services'].timestamp) < 86400000)
       
         updateServicesIndex(currentUrl)
       
       else
         
-        reactor.dispatchEvent('deliverServices', {'services':services,'forUrl':currentUrl})
+        reactor.dispatchEvent('deliverServices', {'services':allItemsInLocalStorage['services'],'forUrl':currentUrl})
       
     else
     
