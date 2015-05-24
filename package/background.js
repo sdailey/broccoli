@@ -72,7 +72,7 @@
       }
       servicesCache[serviceName].decisionPoints = {};
       servicesCache[serviceName].sharedTotalResults = [];
-    } else if ((currentTime - servicesCache[serviceName].canonicalTimestamp) < 86400000) {
+    } else {
       servicesCache[serviceName].canonicalTimestamp = currentTime;
       servicesCache[serviceName].canonical = {};
       if (servicesFull[serviceName].service.links != null) {
@@ -140,7 +140,7 @@
       if ((servicesFull[serviceName] != null) && (servicesFull[serviceName].service.pointsData[pointId] != null)) {
         return chrome.storage.local.get('servicesCache', function(_r) {
           var servicesCache;
-          if ((_r.servicesCache == null) || Object.keys(_r.servicesCache).length === 0 || (_r.servicesCache[serviceName] == null) || ((currentTime - _r.servicesCache[serviceName].canonicalTimestamp) < 86400000)) {
+          if ((_r.servicesCache == null) || Object.keys(_r.servicesCache).length === 0 || (_r.servicesCache[serviceName] == null) || ((currentTime - _r.servicesCache[serviceName].canonicalTimestamp) > 86400000)) {
             if (_r.servicesCache == null) {
               servicesCache = {};
             } else {

@@ -81,7 +81,7 @@ cacheService = (servicesCache, servicesFull, serviceName, currentTime, callback)
     servicesCache[serviceName].decisionPoints = {}
     servicesCache[serviceName].sharedTotalResults = []
     
-  else if ((currentTime - servicesCache[serviceName].canonicalTimestamp) < 86400000) # just refresh the canonical attributes
+  else # just refresh the canonical attributes
     servicesCache[serviceName].canonicalTimestamp = currentTime
     servicesCache[serviceName].canonical = {}
     if servicesFull[serviceName].service.links?
@@ -154,7 +154,7 @@ cacheUserVote = (userAgreedBool, serviceName, pointId) ->
       chrome.storage.local.get('servicesCache', (_r) ->
         
         if !_r.servicesCache? or Object.keys(_r.servicesCache).length is 0 or !_r.servicesCache[serviceName]? or 
-            ((currentTime - _r.servicesCache[serviceName].canonicalTimestamp) < 86400000)
+            ((currentTime - _r.servicesCache[serviceName].canonicalTimestamp) > 86400000)
           
           if !_r.servicesCache?
             servicesCache = {}
