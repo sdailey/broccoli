@@ -7,7 +7,7 @@ serviceMatchObj = {
   # serviceMatch: <bool>
 }
 
-updatesCountTest = 0
+checkForChanges_HourInterval = 24
 
 popupOpen = false
 
@@ -19,7 +19,9 @@ popupParcel = {
   # serviceName
   # forUrl
 }
- 
+
+
+
 sendParcel = (parcel) ->
   outPort = chrome.extension.connect({name: "fromBackgroundToPopup"})
   
@@ -154,7 +156,7 @@ cacheUserVote = (userAgreedBool, serviceName, pointId) ->
       chrome.storage.local.get('servicesCache', (_r) ->
         
         if !_r.servicesCache? or Object.keys(_r.servicesCache).length is 0 or !_r.servicesCache[serviceName]? or 
-            ((currentTime - _r.servicesCache[serviceName].canonicalTimestamp) > 86400000)
+            ((currentTime - _r.servicesCache[serviceName].canonicalTimestamp) > checkForChanges_HourInterval * 3600000)
           
           if !_r.servicesCache?
             servicesCache = {}
@@ -604,8 +606,6 @@ servicesReady = (servicesIndex, forUrl) ->
       
 initialize = (currentUrl) ->
   
-  updatesCountTest++
-  
   currentTime = Date.now()
   
    # to prevent repeated api requests for services - we check to see if we have an up-to-date version in local storage
@@ -613,7 +613,7 @@ initialize = (currentUrl) ->
       
     if allItemsInLocalStorage['services']?
       
-      if ((currentTime - allItemsInLocalStorage['services'].timestamp) < 86400000)
+      if ((currentTime - allItemsInLocalStorage['services'].timestamp) < checkForChanges_HourInterval * 3600000)
       
         updateServicesIndex(currentUrl)
       
